@@ -1,0 +1,19 @@
+# Tableau temp files
+*.twbr
+*.tbm
+Book*.twb
+Book*.twbx
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE files
+.vscode/
+.idea/
+
+# Python (agar future mein add karo)
+__pycache__/
+*.pyc
+.venv/
