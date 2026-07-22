@@ -1,5 +1,7 @@
 # Daikibo Manufacturing — IIoT Downtime Diagnostic Dashboard
 
+![Dashboard Interactive Preview](./assets/demo.gif)
+
 > **An executive-level Tableau dashboard identifying root causes of assembly-line downtime across a global IIoT-instrumented manufacturing network.**
 
 **[👉 View Interactive Dashboard on Tableau Public](https://public.tableau.com/app/profile/hafiz.zaman.yaseen/viz/DaikiboManufacturing-MachineDowntimeAnalysis/Dashboard)**
