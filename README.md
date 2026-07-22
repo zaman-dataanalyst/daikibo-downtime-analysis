@@ -2,6 +2,8 @@
 
 > **An executive-level Tableau dashboard identifying root causes of assembly-line downtime across a global IIoT-instrumented manufacturing network.**
 
+**[👉 View Interactive Dashboard on Tableau Public](https://public.tableau.com/app/profile/hafiz.zaman.yaseen/viz/DaikiboManufacturing-MachineDowntimeAnalysis/Dashboard)**
+
 ---
 
 ## 🏢 The Business Problem
@@ -100,6 +102,13 @@ daikibo-downtime-analysis/
 * **Business Intelligence:** Tableau Desktop
 * **Calculations:** Tableau LODs, Table Calculations, Logical Functions
 * **Data Format:** JSON (Unified IIoT Telemetry)
+
+---
+
+## 🚀 How to Explore This Dashboard
+1. **[View the live interactive dashboard directly on Tableau Public](https://public.tableau.com/app/profile/hafiz.zaman.yaseen/viz/DaikiboManufacturing-MachineDowntimeAnalysis/Dashboard).**
+2. Download the `daikibo-downtime-analysis.twbx` file from this repository.
+3. Open it in Tableau Desktop to review the LOD calculations, calculated fields, and dashboard actions.
 
 ---
 
