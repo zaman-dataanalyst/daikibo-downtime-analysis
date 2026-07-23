@@ -17,3 +17,6 @@ desktop.ini
 __pycache__/
 *.pyc
 .venv/
+
+# Large Media & Asset files (Videos)
+assets/*.mp4

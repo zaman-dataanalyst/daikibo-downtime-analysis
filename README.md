@@ -1,83 +1,103 @@
-# Daikibo Manufacturing — IIoT Downtime Diagnostic Dashboard
+# Daikibo Manufacturing — Machine Downtime Diagnostic Dashboard
 
-![Dashboard Interactive Preview](./assets/demo.gif)
+> **Executive Tableau dashboard identifying root causes of assembly-line downtime across a global IIoT-instrumented manufacturing network.**
 
-> **An executive-level Tableau dashboard identifying root causes of assembly-line downtime across a global IIoT-instrumented manufacturing network.**
-
-**[👉 View Interactive Dashboard on Tableau Public](https://public.tableau.com/app/profile/hafiz.zaman.yaseen/viz/DaikiboManufacturing-MachineDowntimeAnalysis/Dashboard)**
+**📊 [View the live interactive dashboard on Tableau Public](https://public.tableau.com/app/profile/hafiz.zaman.yaseen/viz/DaikiboManufacturing-MachineDowntimeAnalysis/Dashboard)**
 
 ---
 
 ## 🏢 The Business Problem
 
-Modern manufacturing depends on continuous throughput. Every minute of unplanned downtime translates directly into lost production units, idle labor costs, and missed client delivery commitments. 
+Modern manufacturing depends on continuous throughput. Every minute of unplanned downtime translates directly into:
+- Lost production units
+- Idle labor cost on the floor
+- Missed client delivery commitments
+- Escalating repair and part-replacement expenses
 
-Daikibo's operations team deployed **Industrial IoT (IIoT) sensors** across all machinery, emitting health status messages every 10 minutes. However, the telemetry data sat in raw JSON format without an analytical layer. The leadership lacked visibility into two critical areas:
-1. **Where** is the operational time bleeding across the four global facilities?
-2. **Why** is it happening? Which specific machine types are the primary failure drivers?
+Daikibo already had **Industrial IoT (IIoT) sensors** on all machinery, each sending a `healthy` or `unhealthy` status message every 10 minutes to a central telemetry platform. But the data sat in raw JSON with no analytical layer. Leadership needed exactly **two questions** answered:
 
-Without these answers, maintenance budgets were deployed reactively. This project transforms that raw telemetry into a defensible, drill-through diagnostic tool to enable targeted, preventive maintenance.
+> **1. In which location did machines break down the most?**
+>
+> **2. Within that location, which machines broke most often?**
+
+Without answers, the maintenance budget was being deployed reactively rather than surgically. This dashboard replaces gut-feel with a defensible, drill-through diagnostic tool.
 
 ---
 
 ## 💡 The Solution
 
-A single-page executive diagnostic dashboard that answers business questions instantly and maintains analytical context at every level of drill-down.
+A single-page executive dashboard that answers both questions in under 10 seconds of viewing, and continues answering them at every level of drill-down. Built as part of the **Deloitte Australia Data Analytics Job Simulation** on Forage.
 
-**Key Design Principles Executed:**
-* **Executive-First Layout:** Top-level KPI cards for immediate network health, supported by comparison charts and a live narrative panel.
-* **Diagnostic Drill-Down:** Interactive filtering allows users to isolate specific facilities and instantly view their machine-type failure contributions.
-* **Dynamic Narratives:** The Insights and Recommendations panels are programmatically driven by user selection, ensuring the analytical takeaway is always aligned with the visual state.
-* **Stable KPI Reporting:** The "Top Downtime Factory" KPI uses nested Level-of-Detail (LOD) expressions to always reflect the *global* leader, preventing misleading labels during drill-downs.
-
----
-
-## 📊 Dashboard Preview & Interactive States
-
-### Primary Executive View (All Facilities Baseline)
-![Full Dashboard — All Facilities](screenshots/01_dashboard_full.png)
-
----
-
-### Diagnostic Drill-Down Proofs (Interactive Filter States)
-
-Below is the visual proof of how the dashboard KPIs, charts, and dynamic narrative texts update in real-time under user selection:
-
-| Facility State | Downtime Impact | Visual Proof |
-| :--- | :--- | :--- |
-| **Seiko (Osaka)** <br>*Global Bottleneck* | 480 Mins <br>(LaserWelder driven) | ![Seiko Selected](screenshots/02_seiko_selected.png) |
-| **Shenzhen (China)** <br>*Secondary Contributor* | 420 Mins <br>(LaserCutter driven) | ![Shenzhen Selected](screenshots/03_shenzhen_selected.png) |
-| **Meiyo (Tokyo)** <br>*Minor Inefficiency* | 110 Mins <br>(HeavyDutyDrill) | ![Meiyo Selected](screenshots/04_meiyo_selected.png) |
-| **Berlin (Germany)** <br>*Within Standard SLA* | 20 Mins <br>(Isolated incident) | ![Berlin Selected](screenshots/05_berlin_selected.png) |
+**Key design principles executed:**
+- **Executive-first layout** — Top-level KPI cards for immediate network health, supported by comparison charts and a live narrative panel.
+- **Diagnostic drill-down** — Clicking any facility filters the machine-type chart to show that facility's specific contribution.
+- **Dynamic narratives** — The Insights and Recommendations panels rewrite themselves based on the current selection, ensuring the analytical takeaway is always aligned with the visual state.
+- **Deliberately static "Top" KPIs** — The `Top Downtime Factory` and `Top Downtime Device` cards do not change with selection. The client's two questions each have **one correct answer**, independent of what a viewer happens to be exploring. Level-of-Detail (LOD) expressions enforce this stability.
 
 ---
 
 ## 🔍 Key Insights Uncovered
 
-* **Total Network Downtime:** 1,030 minutes recorded across 4 facilities over the month.
-* **Primary Bottleneck (Seiko, Osaka):** Accounts for 480 minutes of downtime (nearly 50% of the network total). The root cause is severely concentrated in a single machine class: **LaserWelder**.
-* **Secondary Contributor (Shenzhen, China):** 420 minutes of downtime, driven primarily by **LaserCutter** failures (390 mins).
-* **Minor Inefficiencies (Meiyo, Tokyo):** 110 minutes concentrated in HeavyDutyDrill and LaserCutter. Not critical, but requires operational monitoring.
-* **Stable Operations (Berlin, Germany):** Operating well within acceptable SLAs with only 20 minutes of isolated downtime.
-* **Class-Level Failure Mode:** Together, LaserWelder and LaserCutter account for **~88% of all network downtime**. This indicates a machine-class vulnerability rather than isolated facility mismanagement.
+- **Total network downtime for the month:** 1,030 minutes across 4 facilities.
+- **Seiko (Osaka) is the primary bottleneck:** 480 minutes, nearly half the network total. Root cause: **100% of it traced to a single machine class — the Laser Welder.**
+- **Shenzhen (China) is a close second:** 420 minutes, driven primarily by Laser Cutter failures (390 mins).
+- **Meiyo (Tokyo) shows secondary inefficiency:** 110 minutes concentrated in Heavy Duty Drill (70 mins) and Laser Cutter (40 mins). Not critical, but worth monitoring.
+- **Berlin is operating within acceptable SLA:** 20 minutes total, isolated to a single Furnace incident.
+- **Class-Level Failure Mode:** Together, Laser Welder and Laser Cutter account for **~88% of all network downtime**. This indicates a machine-class vulnerability rather than isolated facility mismanagement.
+
+### Dashboard States — Diagnostic Drill-Down
+
+Every state below reflects live filtering; the KPIs, chart highlight, and narrative panels all update in response to selection.
+
+![Dashboard Interaction Demo](assets/demo.gif)
+
+| State | Facility Total | View |
+| :--- | :--- | :--- |
+| **All Facilities** (unfiltered baseline) | 1,030 mins | [View](screenshots/01_dashboard_full.png) |
+| **Seiko** — global max, primary bottleneck | 480 mins | [View](screenshots/02_seiko_selected.png) |
+| **Shenzhen** — secondary contributor | 420 mins | [View](screenshots/03_shenzhen_selected.png) |
+| **Meiyo** — moderate inefficiency | 110 mins | [View](screenshots/04_meiyo_selected.png) |
+| **Berlin** — within operational SLA | 20 mins | [View](screenshots/05_berlin_selected.png) |
 
 ---
 
 ## ⚙️ Technical Approach & Skills Demonstrated
 
-### 1. Data Transformation & Measure Creation
-Raw IIoT JSON telemetry (~30,000+ status messages) was parsed and processed. Downtime was quantified by converting binary string states into time intervals using calculated fields:
-`IF [Status] = "unhealthy" THEN 10 ELSE 0 END`
+### 1. Data Transformation & Downtime Measure
+Source data arrived as a unified JSON file (`daikibo-telemetry-data.json`) covering May 2021. Downtime is measured via a calculated field that converts each `unhealthy` status message (sent every 10 mins) into an integer representing lost time:
+```tableau
+IF [Status] = "unhealthy" THEN 10 ELSE 0 END
+```
 
-### 2. Advanced LOD Expressions (Fixing Analytical Bugs)
-A naïve "Top Factory" card will dynamically change based on user filters (e.g., falsely labeling the lowest-downtime facility as "Top" if it's the only one selected). This was engineered out using a 3-step nested `FIXED` LOD calculation to lock the global context:
-`{ FIXED : MAX(IF { FIXED [Factory] : SUM([Unhealthy]) } = { FIXED : MAX({ FIXED [Factory] : SUM([Unhealthy]) }) } THEN [Factory] END) }`
+### 2. LOD-Locked KPI Cards (Fixing Analytical Bugs)
+A naïve implementation of a "Top Factory" card takes whatever facility the user has selected and displays it. Selecting the lowest-downtime facility would mislabel it as "Top". This was fixed using a chained LOD expression to lock the global context:
+```tableau
+// Step 1 — Per-factory total (fixed at the Factory grain)
+{ FIXED [Factory] : SUM([Unhealthy]) }
+
+// Step 2 — Network-wide maximum (fixed at no grain)
+{ FIXED : MAX([Factory Total Downtime]) }
+
+// Step 3 — The factory that owns the max
+{ FIXED : MAX(IF [Factory Total Downtime] = [Global Max Downtime] THEN [Factory] END) }
+```
+Both the Top Factory and Top Device cards stably report the single correct answer across every drill-down state.
 
 ### 3. Context-Aware Narrative Logic
-To prevent false-positive text generation (e.g., calling the 2nd highest downtime the "Maximum"), a dynamic string calculation compares the current selection's aggregate against the global LOD maximum. This seamlessly handles aggregate vs. non-aggregate Tableau rules.
+To prevent false-positive text generation (e.g., calling the 2nd highest downtime the "Maximum"), a dynamic string calculation compares the current selection's aggregate against the global LOD maximum. This seamlessly handles aggregate vs. non-aggregate Tableau rules:
+```tableau
+IF [Factory Count In View] = MIN([Total Factory Count]) THEN
+    "• Enterprise Summary: Daikibo plant-wide downtime is critically bottlenecked..."
+ELSEIF SUM([Unhealthy]) = MIN([Global Max Downtime]) THEN
+    "• " + [Factory Clean Name] + " Plant: Maximum operational downtime recorded..."
+// Additional ELSEIF logic continues for secondary inefficiencies and SLAs
+END
+```
 
 ### 4. Presentation-Layer Data Hygiene
-Raw database strings (`daikibo-factory-seiko`, `LaserWelder`) were cleaned for executive display using Tableau Aliases and `CASE` statement fields, ensuring zero backend syntax leaked to the end-user.
+Raw source strings (`daikibo-factory-seiko`, `LaserWelder`) are unfit for executive display. They were cleaned using two mechanisms:
+- **Tableau Aliases** on dimensions to handle chart axes and standard tooltips automatically.
+- **`CASE` statement fields** to handle narrative and calculated text arrays, ensuring zero backend syntax leaked to the end-user.
 
 ---
 
@@ -86,9 +106,12 @@ Raw database strings (`daikibo-factory-seiko`, `LaserWelder`) were cleaned for e
 ```text
 daikibo-downtime-analysis/
 ├── README.md
-├── daikibo-downtime-analysis.twbx    # Packaged Tableau workbook (data embedded)
+├── dashboard/
+│   └── daikibo-downtime-analysis.twbx    # Packaged Tableau workbook (data embedded)
 ├── data/
-│   └── daikibo-telemetry-data.json   # Raw IIoT telemetry source data
+│   └── daikibo-telemetry-data.json       # Raw IIoT telemetry source data
+├── assets/
+│   └── demo.gif                          # Dashboard interactive preview
 └── screenshots/
     ├── 01_dashboard_full.png
     ├── 02_seiko_selected.png
@@ -101,21 +124,21 @@ daikibo-downtime-analysis/
 
 ## 🛠️ Tech Stack
 
-* **Business Intelligence:** Tableau Desktop
-* **Calculations:** Tableau LODs, Table Calculations, Logical Functions
-* **Data Format:** JSON (Unified IIoT Telemetry)
+- **Business Intelligence:** Tableau Desktop (LODs, Table Calcs, Filter Actions, Dynamic Logic)
+- **Data Format:** JSON (Unified IIoT Telemetry)
 
 ---
 
 ## 🚀 How to Explore This Dashboard
-1. **[View the live interactive dashboard directly on Tableau Public](https://public.tableau.com/app/profile/hafiz.zaman.yaseen/viz/DaikiboManufacturing-MachineDowntimeAnalysis/Dashboard).**
-2. Download the `daikibo-downtime-analysis.twbx` file from this repository.
-3. Open it in Tableau Desktop to review the LOD calculations, calculated fields, and dashboard actions.
+
+1. **[View the live interactive dashboard directly on Tableau Public](https://public.tableau.com/app/profile/hafiz.zaman.yaseen/viz/DaikiboManufacturing-MachineDowntimeAnalysis/Dashboard)**. No download required.
+2. Download the `daikibo-downtime-analysis.twbx` file from the `dashboard/` folder in this repository.
+3. Open it in Tableau Desktop to review the LOD calculations, calculated fields, and dashboard actions natively.
 
 ---
 
 ## 👤 Author
 
-**Hafiz Zaman Yaseen** 
-Data Analyst | Lahore, Pakistan 
+**Hafiz Zaman Yaseen**  
+Data Analyst | Lahore, Pakistan  
 🔗 [LinkedIn](https://www.linkedin.com/in/zaman-dataanalyst/) | 🔗 [GitHub](https://github.com/zaman-dataanalyst)
