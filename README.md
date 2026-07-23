@@ -49,7 +49,7 @@ A single-page executive dashboard that answers both questions in under 10 second
 
 Every state below reflects live filtering; the KPIs, chart highlight, and narrative panels all update in response to selection.
 
-![Dashboard Interaction Demo](assets/demo.gif)
+<img src="assets/demo.gif" width="100%" alt="Dashboard Interaction Demo">
 
 | State | Facility Total | View |
 | :--- | :--- | :--- |
